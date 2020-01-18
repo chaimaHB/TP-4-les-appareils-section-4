@@ -1,0 +1,26 @@
+<h2>Mes appreils</h2>
+<p>
+    <input [(ngModel)]="search" name="search" class="form-control" />
+</p>
+
+<select [(ngModel)]="state" name="state" class="form-control">
+    <option [value]="'all'"> tt machines</option>
+    <option [value]="'open'">Allumé</option>
+    <option [value]="'close'">Eteint</option>
+</select>
+
+<ul class="list-group">
+    <app-appareil  *ngFor="let appareil of appreils | searchFilter: search | filterByState: state; let i = index"
+                    [appareilName]="appareil.name"
+                    [appareilStatus]="appareil.status"
+                    [index]="i"
+                    [id]="appareil.id">
+    </app-appareil>
+</ul>
+<button class="btn btn-success"
+[disabled]="!isAuth"
+(click)="onAllumer()">Tout allumer</button>
+
+<button class="btn btn-danger"
+[disabled]="!isAuth"
+(click)="onEteindre()">Tout éteindre</button>
